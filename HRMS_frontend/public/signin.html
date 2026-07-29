@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign In — HRMS</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+  <script src="assets/js/theme.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=block" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/global.css">
+  <style>
+    .role-card { cursor:pointer; border:1px solid var(--outline-variant); border-radius:.5rem; padding:12px; display:flex; align-items:center; justify-content:center; gap:8px; transition:border-color .15s, background .15s; }
+    .role-card:hover { border-color:var(--primary-fixed-dim); }
+    input[name="role"]:checked + .role-card { border-color:var(--primary); background:var(--primary-light); box-shadow:0 0 0 3px rgba(14,165,233,.12); }
+    input[name="role"]:checked + .role-card .material-symbols-outlined,
+    input[name="role"]:checked + .role-card span { color:var(--primary-hover); }
+  </style>
+</head>
+<body data-auth-page="signin" class="min-h-screen flex items-center justify-center p-4"
+      style="background:radial-gradient(1200px 600px at 50% -10%, #e0f2fe 0%, var(--background) 55%);">
+  <main class="w-full max-w-[460px]">
+    <div class="card animate-in" style="padding:32px;">
+      <!-- Brand -->
+      <div class="flex flex-col items-center gap-2 mb-6">
+        <div class="flex items-center justify-center" style="width:52px;height:52px;border-radius:14px;background:var(--primary-light);">
+          <span class="material-symbols-outlined icon-fill" style="font-size:30px;color:var(--primary-hover);">domain</span>
+        </div>
+        <span class="h-md" style="font-size:22px;color:var(--primary-hover);">HRMS</span>
+      </div>
+
+      <div class="text-center mb-4">
+        <h1 class="h-lg mb-1">Welcome back</h1>
+        <p class="text-muted" style="font-size:14px;">Please sign in to continue</p>
+      </div>
+
+      <!-- Demo credentials (tap to autofill) -->
+      <div style="background:var(--info-container);border:1px solid var(--primary-fixed-dim);border-radius:10px;padding:10px 12px;margin-bottom:16px;">
+        <div class="flex items-center gap-2" style="font-weight:600;font-size:12px;color:#075985;margin-bottom:6px;">
+          <span class="material-symbols-outlined" style="font-size:16px;">science</span> Demo logins — tap to autofill
+        </div>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <button type="button" class="demo-fill" data-email="sarah.jenkins@hrms.com" data-pass="Hrms@1234" data-role="hr"
+            style="text-align:left;background:#fff;border:1px solid var(--primary-fixed-dim);border-radius:7px;padding:7px 10px;cursor:pointer;font-size:12px;color:#075985;">
+            <strong>HR Admin</strong> · sarah.jenkins@hrms.com · Hrms@1234
+          </button>
+          <button type="button" class="demo-fill" data-email="alex.mercer@hrms.com" data-pass="Hrms@1234" data-role="employee"
+            style="text-align:left;background:#fff;border:1px solid var(--primary-fixed-dim);border-radius:7px;padding:7px 10px;cursor:pointer;font-size:12px;color:#075985;">
+            <strong>Employee</strong> · alex.mercer@hrms.com · Hrms@1234
+          </button>
+        </div>
+      </div>
+
+      <form class="flex flex-col gap-4" novalidate>
+        <!-- Role -->
+        <div class="field">
+          <label>Select Role</label>
+          <div class="grid grid-cols-2 gap-3">
+            <label>
+              <input type="radio" name="role" value="employee" class="sr-only" checked>
+              <span class="role-card"><span class="material-symbols-outlined" style="font-size:20px;">badge</span>
+                <span style="font-weight:600;font-size:14px;">Employee</span></span>
+            </label>
+            <label>
+              <input type="radio" name="role" value="hr" class="sr-only">
+              <span class="role-card"><span class="material-symbols-outlined" style="font-size:20px;">admin_panel_settings</span>
+                <span style="font-weight:600;font-size:14px;">HR Admin</span></span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Email -->
+        <div class="field">
+          <label for="loginId">Email Address</label>
+          <input class="input" id="loginId" name="loginId" type="text" autocomplete="username" placeholder="name@company.com">
+        </div>
+
+        <!-- Password -->
+        <div class="field">
+          <label for="password">Password</label>
+          <div class="relative">
+            <input class="input" id="password" name="password" type="password" autocomplete="current-password" placeholder="Enter your password" style="padding-right:44px;">
+            <button type="button" data-toggle-password="#password" aria-label="Toggle password visibility"
+                    class="absolute" style="right:8px;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--outline);cursor:pointer;display:flex;">
+              <span class="material-symbols-outlined">visibility_off</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="flex items-center justify-between" style="margin-top:2px;">
+          <label class="flex items-center gap-2 cursor-pointer" style="font-size:13px;color:var(--on-surface-variant);">
+            <input type="checkbox" style="width:16px;height:16px;accent-color:var(--primary);"> Remember me
+          </label>
+          <a class="link" style="font-size:13px;" href="forgot-password.html">Forgot password?</a>
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="width:100%;margin-top:6px;">Sign In</button>
+      </form>
+
+      <p class="text-center text-muted mt-6" style="font-size:14px;">
+        Don't have an account? <a class="link" href="signup.html">Sign Up</a>
+      </p>
+    </div>
+
+    <p class="text-center text-muted mt-5" style="font-size:12px;">© 2026 HRMS · Every workday, perfectly aligned.</p>
+  </main>
+
+  <script src="js/api.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="assets/js/store.js"></script>
+  <script src="assets/js/ui.js"></script>
+  <script src="js/auth.js"></script>
+  <script>
+    // Tap a demo row to autofill the form (for reviewers).
+    document.querySelectorAll(".demo-fill").forEach(function (b) {
+      b.addEventListener("click", function () {
+        document.getElementById("loginId").value = b.dataset.email;
+        document.getElementById("password").value = b.dataset.pass;
+        var r = document.querySelector('input[name="role"][value="' + b.dataset.role + '"]');
+        if (r) r.checked = true;
+      });
+    });
+  </script>
+</body>
+</html>
